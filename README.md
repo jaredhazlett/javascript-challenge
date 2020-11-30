@@ -1,6 +1,5 @@
 # javascript-challenge
-
-Within static you'll find the assignment. 
+Within static you'll find the javascript filter assignment. 
 The index is visible without drilling down into any folders. 
 css contains the starter code CSS in "style.css".
 images contains the starter code images.
