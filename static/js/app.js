@@ -23,12 +23,18 @@ observations.forEach(function(ufoReport) {
 
 //I've included a reset button to reset the filter. It's very similar to the above code but incorporates d3 to remove the previously added rows and table data
 //to make way for the old data information
-var resetButton = d3.select("#all-data-btn")
+//first create a new variable to select the id for the reset button
+var resetButton = d3.select("#reset-btn")
+//when clicking the reset button, run the funciton 'reset'
 resetButton.on("click", reset)
+//create the function reset
 function reset() {
+	//prevent refreshing the page
 	d3.event.preventDefault();
-	var delete_body_reset_rows = d3.selectAll("td").remove();
+	//delete any and all table rows and table data to make way for a new table.
+	var delete_body_reset_rows = d3.selectAll("tr").remove();
 	var delete_body_reset = d3.selectAll("td").remove();
+	//cycle through the code we used to start the page above - 
 	observations.forEach(function(ufoReport) {
 		console.log(ufoReport)
 		var row = tbody.append("tr");
@@ -39,29 +45,28 @@ function reset() {
 		});
 	});
 };
-// step 3 use forms, d3, and filters to create a functioning text submission.
 
+//finally we'll add our filter button
 var filterButtonDate = d3.select("#filter-btn");
-
-//use .on to click and run the function that will ultimately filter your data
-
-//filterButton.on("click", runFilter)
-
-filterButtonDate.on("submit", runFilter)
+//when we click the filter button, we'll run our filter
 filterButtonDate.on("click", runFilter)
+//create our filter function
 function runFilter() {
+	//prevent refreshing the page and delete any table rows or table data to make way for a filtered table
 	d3.event.preventDefault();
 	var delete_body_data = d3.selectAll("td").remove();
 	var delete_body_rows = d3.selectAll("tr").remove();
+	//select the element within the html that will hold the value we want to filter with
 	var inputElement = d3.select("#datetime")
+	//select the property of the value within the element using .property("value");
 	var inputValue = inputElement.property("value");
-	//we're console.loging out these values as a way of checking to see if our data is working.
+	//we're console.loging out these values as a way of checking to see if our code is working.
 	console.log(inputValue)
 	console.log(observations)
-	//now we'll filter our data using the arrow keys (otherwise we'd use function())) and equal it to the value typed within the search bar
+	//now we'll filter our observations based on the single observation => based on the observation.datetime as a boolean T/F vs what was written in the input value
 	var filteredData = observations.filter(observation => observation.datetime === inputValue)
 	
-	//print out the filtered data so we know we've done
+	//print out the filtered data so we know it's working
 	console.log(filteredData)
 	//here we want to reset and re-run the table function but only with the filtered data
 	filteredData.forEach(function(ufoReport) {
