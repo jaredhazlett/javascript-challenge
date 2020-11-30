@@ -1,24 +1,28 @@
 // from data.js - homework assignment - first input data into the website
 // YOUR CODE HERE!
+// we start by defining our data as a variable. and defining the "tbody" as a variable using d3 to select it within the html. We want to add and subtract rows from 
+//tbody
 var observations = data;
 
 var tbody = d3.select("tbody")
 
-console.log(observations);
-
-// step 1 loop through the data and console.log each weather report object
-
-// step 2 use d3 to append one table row 'tr' for each ufo object. We'll add text in a few
+// step 1 loop through the data and console.log each weather report object to make sure the code is working
 observations.forEach(function(ufoReport) {
 	console.log(ufoReport)
+	// step 2 we need to create new rows to input our table data. Use d3 to append one table row 'tr' for each ufo object.
+	//revising the above code, for each observation, we're appending a row.
 	var row = tbody.append("tr");
+	//we need another for each function, but we need to use Object.entries from each observation(ufoReport) to forEach through and append the table data.
 	Object.entries(ufoReport).forEach(function([key, value]) {
 		console.log(key, value);
+		//here we append table data with each cell.text(value)
 		var cell = row.append("td");
 		cell.text(value);
 	});
 });
 
+//I've included a reset button to reset the filter. It's very similar to the above code but incorporates d3 to remove the previously added rows and table data
+//to make way for the old data information
 var resetButton = d3.select("#all-data-btn")
 resetButton.on("click", reset)
 function reset() {
